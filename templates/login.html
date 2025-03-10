@@ -3,27 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
     <title>Login</title>
 </head>
 <body>
-    <h1>Login</h1>
-{#    {% with messages = get_flashed_messages() %}#}
-{#        {% if messages %}#}
-{#            <ul>#}
-{#                {% for message in messages %}#}
-{#                    <li>{{ message }}</li>#}
-{#                {% endfor %}#}
-{#            </ul>#}
-{#        {% endif %}#}
-{#    {% endwith %}#}
-    <form method="POST" action="">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <button type="submit">Login</button>
-    </form>
-    <p>Forgot your password? <a href="">Reset it here</a></p>
-    <p>Don't have an account? <a href="">Register here</a></p>
+    <div class="login-container">
+        <h1>Student Login</h1>
+        <form method="POST" action="">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>Forgot your password? <a href="#">Reset it here</a></p>
+        <p>Don't have an account? <a href="#">Register here</a></p>
+    </div>
 </body>
 </html>
