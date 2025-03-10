@@ -54,7 +54,7 @@ def forgot_password():
     return render_template('forgot_password.html')
 
 
-@app.route('/contact_form', methods=['GET', 'POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def contact_form():
     if request.method == 'POST':
         contact = {
@@ -65,18 +65,18 @@ def contact_form():
         }
         mongo.db.contacts.insert_one(contact)
         flash('Contact saved successfully!', 'success')
-    return render_template('contact_form.html')
+    return render_template('register.html')
 
 
-@app.route('/search', methods=['GET', 'POST'])
-def search():
-    contact = None
-    if request.method == 'POST':
-        registration_number = request.form['registration_number']
-        contact = mongo.db.contacts.find_one({'registration_number': registration_number})
-        if not contact:
-            flash('No contact found with that registration number.', 'warning')
-    return render_template('search.html', contact=contact)
+# @app.route('/search', methods=['GET', 'POST'])
+# def search():
+#     contact = None
+#     if request.method == 'POST':
+#         registration_number = request.form['registration_number']
+#         contact = mongo.db.contacts.find_one({'registration_number': registration_number})
+#         if not contact:
+#             flash('No contact found with that registration number.', 'warning')
+#     return render_template('search.html', contact=contact)
 
 
 if __name__ == '__main__':
