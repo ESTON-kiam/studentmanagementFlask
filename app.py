@@ -12,16 +12,13 @@ app = Flask(__name__, static_folder='static')
 app.secret_key = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
-
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/contactApp'
 mongo = PyMongo(app)
 
-
-EMAIL_ADDRESS = 'engestonbrandon@gmail.com'  # Replace with your email
-EMAIL_PASSWORD = 'dsth izzm npjl qebi'  # Replace with your email password
+EMAIL_ADDRESS = ''
+EMAIL_PASSWORD = ''
 EMAIL_SERVER = 'smtp.gmail.com'
-EMAIL_PORT = 587  #
-
+EMAIL_PORT = 587
 
 
 @app.route('/')
@@ -57,12 +54,10 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
 
-
         existing_user = mongo.db.users.find_one({'$or': [{'username': username}, {'email': email}]})
         if existing_user:
             flash('Username or email already exists', 'danger')
             return redirect(url_for('register'))
-
 
         hashed_password = generate_password_hash(password)
         mongo.db.users.insert_one({
@@ -89,12 +84,10 @@ def forgot_password():
             reset_token = str(uuid.uuid4())
             expiry = datetime.now() + timedelta(hours=1)
 
-
             mongo.db.users.update_one(
                 {'_id': user['_id']},
                 {'$set': {'reset_token': reset_token, 'reset_expiry': expiry}}
             )
-
 
             send_reset_email(email, reset_token)
 
@@ -108,7 +101,6 @@ def forgot_password():
 
 @app.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-
     user = mongo.db.users.find_one({
         'reset_token': token,
         'reset_expiry': {'$gt': datetime.now()}
@@ -125,7 +117,6 @@ def reset_password(token):
         if new_password != confirm_password:
             flash('Passwords do not match', 'danger')
             return render_template('reset_password.html', token=token)
-
 
         hashed_password = generate_password_hash(new_password)
         mongo.db.users.update_one(
@@ -163,7 +154,6 @@ def add_contact():
         email = request.form.get('email')
         address = request.form.get('address')
 
-
         existing_contact = mongo.db.contacts.find_one({
             'user_id': session['user_id'],
             'registration_number': registration_number
@@ -172,7 +162,6 @@ def add_contact():
         if existing_contact:
             flash('Contact with this registration number already exists', 'danger')
             return redirect(url_for('add_contact'))
-
 
         mongo.db.contacts.insert_one({
             'user_id': session['user_id'],
