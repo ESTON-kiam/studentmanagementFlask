@@ -1,8 +1,6 @@
-# app.py
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_pymongo import PyMongo
 from werkzeug.security import generate_password_hash, check_password_hash
-from bson.objectid import ObjectId
 import os
 from datetime import datetime, timedelta
 import uuid
@@ -11,21 +9,21 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__, static_folder='static')
-app.secret_key = os.urandom(24)  # For session management
+app.secret_key = os.urandom(24)
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 
-# MongoDB configuration
+
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/contactApp'
 mongo = PyMongo(app)
 
-# Email configuration
+
 EMAIL_ADDRESS = 'your_email@example.com'  # Replace with your email
 EMAIL_PASSWORD = 'your_email_password'  # Replace with your email password
 EMAIL_SERVER = 'smtp.example.com'  # Replace with your SMTP server
 EMAIL_PORT = 587  # Replace with your SMTP port
 
 
-# Routes
+
 @app.route('/')
 def index():
     if 'user_id' in session:
@@ -59,13 +57,13 @@ def register():
         email = request.form.get('email')
         password = request.form.get('password')
 
-        # Check if user already exists
+
         existing_user = mongo.db.users.find_one({'$or': [{'username': username}, {'email': email}]})
         if existing_user:
             flash('Username or email already exists', 'danger')
             return redirect(url_for('register'))
 
-        # Create new user
+
         hashed_password = generate_password_hash(password)
         mongo.db.users.insert_one({
             'username': username,
@@ -87,17 +85,17 @@ def forgot_password():
         user = mongo.db.users.find_one({'email': email})
 
         if user:
-            # Generate reset token
+
             reset_token = str(uuid.uuid4())
             expiry = datetime.now() + timedelta(hours=1)
 
-            # Save reset token to database
+
             mongo.db.users.update_one(
                 {'_id': user['_id']},
                 {'$set': {'reset_token': reset_token, 'reset_expiry': expiry}}
             )
 
-            # Send reset email
+
             send_reset_email(email, reset_token)
 
             flash('Password reset instructions sent to your email', 'info')
@@ -110,7 +108,7 @@ def forgot_password():
 
 @app.route('/reset-password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    # Find user with this token
+
     user = mongo.db.users.find_one({
         'reset_token': token,
         'reset_expiry': {'$gt': datetime.now()}
@@ -128,7 +126,7 @@ def reset_password(token):
             flash('Passwords do not match', 'danger')
             return render_template('reset_password.html', token=token)
 
-        # Update user password
+
         hashed_password = generate_password_hash(new_password)
         mongo.db.users.update_one(
             {'_id': user['_id']},
@@ -165,7 +163,7 @@ def add_contact():
         email = request.form.get('email')
         address = request.form.get('address')
 
-        # Check if contact with this registration number already exists
+
         existing_contact = mongo.db.contacts.find_one({
             'user_id': session['user_id'],
             'registration_number': registration_number
@@ -175,7 +173,7 @@ def add_contact():
             flash('Contact with this registration number already exists', 'danger')
             return redirect(url_for('add_contact'))
 
-        # Add new contact
+
         mongo.db.contacts.insert_one({
             'user_id': session['user_id'],
             'registration_number': registration_number,
