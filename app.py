@@ -19,7 +19,7 @@ mongo = PyMongo(app)
 
 EMAIL_ADDRESS = 'your_email@example.com'  # Replace with your email
 EMAIL_PASSWORD = 'your_email_password'  # Replace with your email password
-EMAIL_SERVER = 'smtp.example.com'  # Replace with your SMTP server
+EMAIL_SERVER = 'smtp.gmail.com'  # Replace with your SMTP server
 EMAIL_PORT = 587  # Replace with your SMTP port
 
 
