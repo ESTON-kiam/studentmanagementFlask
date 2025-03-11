@@ -20,13 +20,20 @@ h2 {
     color: #333;
 }
 
+.label-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
 label {
     font-size: 14px;
     color: #555;
     margin-bottom: 5px;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
     width: 100%;
     padding: 8px;
     margin: 8px 0;
