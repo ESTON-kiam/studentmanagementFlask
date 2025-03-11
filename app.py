@@ -17,10 +17,10 @@ app.config['MONGO_URI'] = 'mongodb://localhost:27017/contactApp'
 mongo = PyMongo(app)
 
 
-EMAIL_ADDRESS = 'your_email@example.com'  # Replace with your email
-EMAIL_PASSWORD = 'your_email_password'  # Replace with your email password
-EMAIL_SERVER = 'smtp.gmail.com'  # Replace with your SMTP server
-EMAIL_PORT = 587  # Replace with your SMTP port
+EMAIL_ADDRESS = 'engestonbrandon@gmail.com'  # Replace with your email
+EMAIL_PASSWORD = 'dsth izzm npjl qebi'  # Replace with your email password
+EMAIL_SERVER = 'smtp.gmail.com'
+EMAIL_PORT = 587  #
 
 
 
