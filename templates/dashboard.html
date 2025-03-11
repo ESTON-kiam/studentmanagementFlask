@@ -1,31 +1,24 @@
+<!-- templates/dashboard.html -->
 {% extends 'base.html' %}
 
+{% block title %}Dashboard{% endblock %}
+
 {% block content %}
-<div class="dashboard">
-    <h2>Welcome to your Dashboard</h2>
-    <div class="user-info">
-        <h3>Your Contact Information</h3>
-        <div class="info-card">
-            <div class="info-item">
-                <span class="label">Registration Number:</span>
-                <span class="value">{{ user.registration_number }}</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Email:</span>
-                <span class="value">{{ user.email }}</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Mobile:</span>
-                <span class="value">{{ user.mobile }}</span>
-            </div>
-            <div class="info-item">
-                <span class="label">Address:</span>
-                <span class="value">{{ user.address }}</span>
-            </div>
+<h2 class="dashboard-welcome">Welcome, {{ session.username }}!</h2>
+<div class="dashboard-card-container">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Add New Contact</h5>
+            <p class="card-text">Add a new contact to your database.</p>
+            <a href="{{ url_for('add_contact') }}" class="btn btn-primary">Add Contact</a>
         </div>
     </div>
-    <div class="dashboard-links">
-        <a href="{{ url_for('search') }}" class="btn btn-primary">Search Contacts</a>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Search Contacts</h5>
+            <p class="card-text">Search for contacts by registration number.</p>
+            <a href="{{ url_for('search') }}" class="btn btn-primary">Search</a>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,25 +1,29 @@
+<!-- templates/add_contact.html -->
 {% extends 'base.html' %}
+
+{% block title %}Add Contact{% endblock %}
 
 {% block content %}
 <div class="form-container">
-    <h2>{% if contact %}Edit{% else %}Add{% endif %} Contact Information</h2>
+    <h2 class="mb-4">Add New Contact</h2>
     <form method="POST" action="{{ url_for('add_contact') }}">
-        <div class="form-group">
-            <label for="mobile">Mobile Phone Number</label>
-            <input type="text" id="mobile" name="mobile" value="{{ contact.mobile if contact else '' }}" required>
+        <div class="mb-3">
+            <label for="registration_number" class="form-label">Registration Number</label>
+            <input type="text" class="form-control" id="registration_number" name="registration_number" required>
         </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="{{ contact.email if contact else '' }}" required>
+        <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile Phone Number</label>
+            <input type="tel" class="form-control" id="mobile" name="mobile" required>
         </div>
-        <div class="form-group">
-            <label for="address">Address</label>
-            <textarea id="address" name="address" rows="3" required>{{ contact.address if contact else '' }}</textarea>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
         </div>
-        <button type="submit" class="btn">{% if contact %}Update{% else %}Save{% endif %} Contact</button>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Save Contact</button>
     </form>
-    <div class="form-links">
-        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
-    </div>
 </div>
 {% endblock %}

@@ -1,42 +1,47 @@
+<!-- templates/search.html -->
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="search-container">
-    <h2>Search Contacts</h2>
-    <form action="{{ url_for('search') }}" method="post" class="search-form">
-        <div class="form-group">
-            <label for="registration_number">Registration Number</label>
-            <input type="text" id="registration_number" name="registration_number" required>
-        </div>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </form>
+{% block title %}Search Contacts{% endblock %}
 
-    {% if results %}
-        <div class="search-results">
-            <h3>Search Results</h3>
-            {% for user in results %}
-                <div class="result-card">
-                    <div class="info-item">
-                        <span class="label">Registration Number:</span>
-                        <span class="value">{{ user.registration_number }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Email:</span>
-                        <span class="value">{{ user.email }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Mobile:</span>
-                        <span class="value">{{ user.mobile }}</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="label">Address:</span>
-                        <span class="value">{{ user.address }}</span>
-                    </div>
-                </div>
-            {% endfor %}
+{% block content %}
+<h2 class="mb-4">Search Contacts</h2>
+<div class="form-container">
+    <form method="POST" action="{{ url_for('search') }}">
+        <div class="mb-3">
+            <label for="registration_number" class="form-label">Registration Number</label>
+            <input type="text" class="form-control" id="registration_number" name="registration_number" required>
         </div>
+        <button type="submit" class="btn btn-primary w-100">Search</button>
+    </form>
+</div>
+
+<div class="search-results">
+    {% if contacts %}
+    <h3>Search Results</h3>
+    {% for contact in contacts %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Registration Number:"><span>{{ contact.registration_number }}</span></td>
+            </tr>
+            <tr>
+                <td data-label="Mobile:"><span>{{ contact.mobile }}</span></td>
+            </tr>
+            <tr>
+                <td data-label="Email:"><span>{{ contact.email }}</span></td>
+            </tr>
+            <tr>
+                <td data-label="Address:"><span>{{ contact.address }}</span></td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
     {% endif %}
 </div>
 {% endblock %}
