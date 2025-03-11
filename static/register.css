@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    width: 300px;
+    width: 400px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
@@ -23,7 +23,7 @@ h2 {
 .label-group {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 20px;
     margin-bottom: 10px;
 }
 
@@ -33,12 +33,16 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
     width: 100%;
     padding: 8px;
-    margin: 8px 0;
+    margin: 4px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 button {

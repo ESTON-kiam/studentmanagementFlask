@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="dashboard">
+    <h2>Welcome to your Dashboard</h2>
+    <div class="user-info">
+        <h3>Your Contact Information</h3>
+        <div class="info-card">
+            <div class="info-item">
+                <span class="label">Registration Number:</span>
+                <span class="value">{{ user.registration_number }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Email:</span>
+                <span class="value">{{ user.email }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Mobile:</span>
+                <span class="value">{{ user.mobile }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Address:</span>
+                <span class="value">{{ user.address }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="dashboard-links">
+        <a href="{{ url_for('search') }}" class="btn btn-primary">Search Contacts</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="search-container">
+    <h2>Search Contacts</h2>
+    <form action="{{ url_for('search') }}" method="post" class="search-form">
+        <div class="form-group">
+            <label for="registration_number">Registration Number</label>
+            <input type="text" id="registration_number" name="registration_number" required>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    {% if results %}
+        <div class="search-results">
+            <h3>Search Results</h3>
+            {% for user in results %}
+                <div class="result-card">
+                    <div class="info-item">
+                        <span class="label">Registration Number:</span>
+                        <span class="value">{{ user.registration_number }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Email:</span>
+                        <span class="value">{{ user.email }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Mobile:</span>
+                        <span class="value">{{ user.mobile }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Address:</span>
+                        <span class="value">{{ user.address }}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
