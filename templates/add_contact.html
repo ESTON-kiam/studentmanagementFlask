@@ -8,19 +8,19 @@
     <form method="POST" action="{{ url_for('add_contact') }}">
         <div class="mb-3">
             <label for="registration_number" class="form-label">Registration Number</label>
-            <input type="text" class="form-control" id="registration_number" name="registration_number" required>
+            <input type="text" class="form-control" id="registration_number" name="registration_number" placeholder="Registration_number" required>
         </div>
         <div class="mb-3">
             <label for="mobile" class="form-label">Mobile Phone Number</label>
-            <input type="tel" class="form-control" id="mobile" name="mobile" required>
+            <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Telephone Number" required>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
         </div>
         <div class="mb-3">
             <label for="address" class="form-label">Address</label>
-            <textarea class="form-control" id="address" name="address" rows="3" required></textarea>
+            <textarea class="form-control" id="address" name="address" rows="3" placeholder="Address" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary w-100">Save Contact</button>
     </form>
