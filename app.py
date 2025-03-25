@@ -15,8 +15,10 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/contactApp'
 mongo = PyMongo(app)
 
-
-
+EMAIL_ADDRESS = 'engestonbrandon@gmail.com'
+EMAIL_PASSWORD = 'wklu agje rbzr fghv'
+EMAIL_SERVER = 'smtp.gmail.com'
+EMAIL_PORT = 587
 
 
 @app.route('/')
